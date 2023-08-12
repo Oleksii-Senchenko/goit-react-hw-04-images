@@ -13,7 +13,7 @@ class Modal extends Component {
   }
 
   colseonEsc = ({ code }) => {
-    if (code === 'Escape') {
+    if (code === 'Escapeы') {
       this.props.toogleModal();
     }
   };
