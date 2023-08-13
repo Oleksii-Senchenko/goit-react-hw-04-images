@@ -3,7 +3,7 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 import { ImageList } from './ImageGallery.styled';
 
-function ImageGallery({ images, toogleModal, getLargeImage }) {
+function ImageGallery({ images }) {
   return (
     <ImageList>
       {images.map(({ id, webformatURL, largeImageURL, tags }) => (
@@ -12,8 +12,6 @@ function ImageGallery({ images, toogleModal, getLargeImage }) {
           webformatURL={webformatURL}
           largeImageURL={largeImageURL}
           tags={tags}
-          toogleModal={toogleModal}
-          getLargeImage={getLargeImage} 
         />
       ))}
     </ImageList>

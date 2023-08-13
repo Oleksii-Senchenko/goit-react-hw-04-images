@@ -1,39 +1,40 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import { BackDrop } from './Modal.styled';
 import { MadalFace } from './Modal.styled';
 
-class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.colseonEsc);
-  }
+function Modal({ toogleModal, largeImage }) {
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.colseonEsc);
-  }
 
-  colseonEsc = ({ code }) => {
-    if (code === 'Escapeы') {
-      this.props.toogleModal();
+  useEffect(() => {
+    window.addEventListener('keydown', colseonEsc);
+
+    return () => {
+      window.removeEventListener('keydown', colseonEsc);
+    };
+  });
+
+
+
+  const colseonEsc = ({ code }) => {
+    if (code === 'Escape') {
+      toogleModal();
     }
   };
 
-  closeOnClickBackDrop = e => {
+  const closeOnClickBackDrop = e => {
     if (e.currentTarget === e.target) {
-      this.props.toogleModal();
+      toogleModal();
     }
   };
 
-  render() {
-    const { largeImage } = this.props;
-    return (
-      <BackDrop onClick={this.closeOnClickBackDrop}>
-        <MadalFace>
-          <img src={largeImage} alt="" />
-        </MadalFace>
-      </BackDrop>
-    );
-  }
+  return (
+    <BackDrop onClick={closeOnClickBackDrop}>
+      <MadalFace>
+        <img src={largeImage} alt="" />
+      </MadalFace>
+    </BackDrop>
+  );
 }
 
 export default Modal;

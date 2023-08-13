@@ -1,18 +1,13 @@
-import React from 'react';
+import { React, useContext } from 'react';
+import ModalContext from 'context';
 
 import { ImageItem, ImageItemImage } from './ImageGalleryItem.styled';
 
-function ImageGalleryItem({
-  id,
-  webformatURL,
-  largeImageURL,
-  tags,
-  toogleModal,
-  getLargeImage,
-}) {
+function ImageGalleryItem({ id, webformatURL, largeImageURL, tags }) {
+  const { toogleModal, getLargeImage } = useContext(ModalContext);
   const photoTranfer = () => {
     getLargeImage(largeImageURL);
-    toogleModal()
+    toogleModal();
   };
 
   return (

@@ -1,101 +1,77 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import ModalContext from 'context';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
-
 import getImage from '../Api/Api';
 
-class App extends Component {
-  state = {
-    searchQuery: '',
-    page: 1,
-    images: [],
-    modalShown: false,
-    largeImage: '',
-    buttonVisible: false,
-    loader: false,
+function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [page, setPage] = useState(0);
+  const [images, setImages] = useState([]);
+  const [modalShown, setModalShown] = useState(false);
+  const [largeImage, setLargeImage] = useState('');
+  const [buttonVisible, setButtonVisible] = useState(false);
+  const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    const takeValue = async () => {
+      setLoader(true);
+      try {
+        const { hits, totalHits } = await getImage(searchQuery, page);
+
+        setImages(prevImages => [...prevImages, hits]);
+        setButtonVisible(page < Math.ceil(totalHits / 12));
+      } catch (error) {
+        console.error();
+      } finally {
+        setLoader(false);
+      }
+    };
+    takeValue();
+  }, [page, searchQuery]);
+
+  const onChange = value => {
+    setPage(1);
+    setImages([]);
+    searchQuery(value);
   };
 
-  takeValue = async () => {
-    const { searchQuery, page } = this.state;
-    this.setState({
-      loader: true,
-    });
-    try {
-      const { hits, totalHits } = await getImage(searchQuery, page);
-      this.setState(prev => ({
-        images: [...prev.images, ...hits],
-        buttonVisible: page < Math.ceil(totalHits / 12),
-      }));
-    } catch (error) {
-      console.error();
-    } finally {
-      this.setState({
-        loader: false,
-      });
-    }
+  const toogleModal = () => {
+    setModalShown(!modalShown);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { searchQuery, page } = this.state;
-    if (searchQuery !== prevState.searchQuery || page !== prevState.page) {
-      this.takeValue();
-    }
-  }
-
-  onChange = value => {
-    this.setState({
-      page: 1,
-      images: [],
-      searchQuery: value,
-    });
-  };
-
-  toogleModal = () => {
-    const { modalShown } = this.state;
-    this.setState({
-      modalShown: !modalShown,
-    });
-  };
-
-  getLargeImage = largeImage => {
-    this.setState({
+  const getLargeImage = largeImage => {
+    setLargeImage({
       largeImage: largeImage,
     });
-    console.log(largeImage);
   };
 
-  loadMore = () => {
-    this.setState(prev => ({
-      page: prev.page + 1,
-    }));
+  const loadMore = () => {
+    setPage(prevPage => prevPage + 1);
   };
 
-  render() {
-    const { images, modalShown, largeImage, buttonVisible, loader } =
-      this.state;
-
-    return (
-      <div>
-        <Searchbar onChange={this.onChange} />
-        <ImageGallery
-          images={images}
-          toogleModal={this.toogleModal}
-          getLargeImage={this.getLargeImage}
-        />
+  return (
+    <div>
+      <ModalContext.Provider
+        value={{
+          toogleModal: toogleModal,
+          getLargeImage: getLargeImage,
+        }}
+      >
+        <Searchbar onChange={onChange} />
+        <ImageGallery images={images} />
         {loader && <Loader />}
-
-        {buttonVisible && <Button loadMore={this.loadMore} />}
-
+        {buttonVisible && <Button loadMore={loadMore} />}
         {modalShown && (
-          <Modal toogleModal={this.toogleModal} largeImage={largeImage} />
+          <Modal toogleModal={toogleModal} largeImage={largeImage} />
         )}
-      </div>
-    );
-  }
+      </ModalContext.Provider>
+    </div>
+  );
 }
 
 export default App;
