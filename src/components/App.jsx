@@ -37,7 +37,7 @@ function App() {
   const onChange = value => {
     setPage(1);
     setImages([]);
-    searchQuery(value);
+    setSearchQuery(value);
   };
 
   const toogleModal = () => {
