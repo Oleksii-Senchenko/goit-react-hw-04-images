@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   Header,
@@ -7,43 +7,38 @@ import {
   SearchFormInput,
 } from './Searchbar.styled';
 
-function Searchbar ({onChange}) {
-
-const [searchQuery,setSearchQuery] = useState('')
- const  handleChange = ({ target }) => {
-
+function Searchbar({ onChange }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const handleChange = ({ target }) => {
     const { value } = target;
-setSearchQuery(value)
 
+    setSearchQuery(value);
   };
 
- const onSubmit = e => {
-
+  const onSubmit = e => {
     e.preventDefault();
 
     onChange(searchQuery);
   };
 
+  return (
+    <Header>
+      <Form onSubmit={onSubmit}>
+        <SearchFormButton type="submit">
+          <span>Search</span>
+        </SearchFormButton>
 
-    return (
-      <Header>
-        <Form onSubmit={onSubmit}>
-          <SearchFormButton type="submit">
-            <span>Search</span>
-          </SearchFormButton>
-
-          <SearchFormInput
-            type="text"
-            autoComplete="off"
-            autoFocus
-            value={searchQuery}
-            onChange={handleChange}
-            placeholder="Search images and photos"
-          />
-        </Form>
-      </Header>
-    );
-  
+        <SearchFormInput
+          type="text"
+          autoComplete="off"
+          autoFocus
+          value={searchQuery}
+          onChange={handleChange}
+          placeholder="Search images and photos"
+        />
+      </Form>
+    </Header>
+  );
 }
 
 export default Searchbar;

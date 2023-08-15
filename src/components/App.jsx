@@ -10,7 +10,7 @@ import getImage from '../Api/Api';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
   const [modalShown, setModalShown] = useState(false);
   const [largeImage, setLargeImage] = useState('');
@@ -18,15 +18,19 @@ function App() {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+   if (page === 1 && searchQuery === '') {
+     return;
+   }
+
     const takeValue = async () => {
       setLoader(true);
       try {
         const { hits, totalHits } = await getImage(searchQuery, page);
 
-        setImages(prevImages => [...prevImages, hits]);
+        setImages(prevImages => [...prevImages, ...hits]);
         setButtonVisible(page < Math.ceil(totalHits / 12));
       } catch (error) {
-        console.error();
+        console.error('Error fetching images:', error);
       } finally {
         setLoader(false);
       }
@@ -45,9 +49,7 @@ function App() {
   };
 
   const getLargeImage = largeImage => {
-    setLargeImage({
-      largeImage: largeImage,
-    });
+    setLargeImage(largeImage);
   };
 
   const loadMore = () => {
