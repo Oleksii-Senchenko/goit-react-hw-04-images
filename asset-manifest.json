@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Oleksii-Senchenko/goit-react-hw-04-images/static/css/main.7acaea2f.css",
-    "main.js": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.07d3183d.js",
+    "main.css": "/Oleksii-Senchenko/goit-react-hw-04-images/static/css/main.d1803036.css",
+    "main.js": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.1db226b4.js",
     "index.html": "/Oleksii-Senchenko/goit-react-hw-04-images/index.html",
-    "main.7acaea2f.css.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.07d3183d.js.map"
+    "main.d1803036.css.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/css/main.d1803036.css.map",
+    "main.1db226b4.js.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.1db226b4.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.d1803036.css",
+    "static/js/main.1db226b4.js"
   ]
 }
