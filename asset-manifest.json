@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Oleksii-Senchenko/goit-react-hw-04-images/static/css/main.d1803036.css",
-    "main.js": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.1db226b4.js",
+    "main.js": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.d2e68c2e.js",
     "index.html": "/Oleksii-Senchenko/goit-react-hw-04-images/index.html",
     "main.d1803036.css.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/css/main.d1803036.css.map",
-    "main.1db226b4.js.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.1db226b4.js.map"
+    "main.d2e68c2e.js.map": "/Oleksii-Senchenko/goit-react-hw-04-images/static/js/main.d2e68c2e.js.map"
   },
   "entrypoints": [
     "static/css/main.d1803036.css",
-    "static/js/main.1db226b4.js"
+    "static/js/main.d2e68c2e.js"
   ]
 }
